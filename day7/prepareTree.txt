@@ -1,0 +1,17 @@
+Regex                       --> Change with  
+\$ ls 				        --> ___                     
+dir \w+ 			        --> ___                     
+
+\n(?=\d+)			        --> \n(File (               
+(?<=\d+) (?=\w+.*)		    --> ,"                  
+(?<="\w+.*)\n			    --> ")),\n              
+
+\$ cd \.\.			        --> ]),                     
+\$ cd_				        --> (Branch "               
+(?<=(\(Branch "[\w/]*))\n	--> " [             
+
+\n				            --> ___                         
+,\]				            --> ]                           
+
+--> Remove last ,
+--> add ])	^as much as needed = (count \[ - count \])
