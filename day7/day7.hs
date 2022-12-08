@@ -1,4 +1,4 @@
-module Ex1 where
+module Day7 where
 
 import System.IO
 import Data.List
@@ -164,12 +164,17 @@ inputToTree s = read (process9 $ process8 $ process7 $
 -- COPMUTE ANSWERS
 ----------------------------------------------------------------------------------------
 
+-- answer for part 1
 answer1 :: MyTree -> Int
 answer1 tree = sumDirUnder 100000 tree
+-- answer 1 = 1792222
 
+-- answer for part 2
 answer2 :: MyTree -> Int
 answer2 tree = fileToRemove (spaceToFree 70000000 30000000 tree) tree
+-- answer 2 = 1112963
 
+-- show solutions
 compute :: FilePath -> IO ()
 compute path = do 
     content <- readFile path
@@ -178,3 +183,4 @@ compute path = do
     putStrLn $ show $ answer1 $ tree
     putStr "Part 2: "
     putStrLn $ show $ answer2 $ tree
+
