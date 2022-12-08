@@ -1,4 +1,4 @@
-module Ex1 where
+module Day8 where
 
 import Data.List
 import System.IO
