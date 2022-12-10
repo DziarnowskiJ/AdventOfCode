@@ -10,7 +10,9 @@ import Data.List
 -- INPUT PROCESSING
 ----------------------------------------------------------------------------------------------
 
+---------
 -- BOXES
+---------
 
 -- take lines that represent boxes
 getBoxes :: String -> [String]
@@ -50,7 +52,9 @@ inputBoxes s =
     map (boxInside . drop 1) $ 
     getBoxes s
 
+----------------
 -- INSTRUCTIONS
+----------------
 
 -- rest of input    
 inputInstructions :: String -> [(Int, Int, Int)]
