@@ -75,9 +75,10 @@ answer2 :: String -> String
 answer2 s = splitLine $ drawLine '#' '.' $ execute initProcess $ convertInput s
 
 answer2_clean :: String -> String
-answer2_clean s = splitLine $ drawLine '#' ' ' $ execute initProcess $ convertInput s
+answer2_clean s = splitLine $ drawLine '█' ' ' $ execute initProcess $ convertInput s
 -- answer 2 = RFZEKBFA
 {-
+
 ###..####.####.####.#..#.###..####..##..
 #..#.#.......#.#....#.#..#..#.#....#..#.
 #..#.###....#..###..##...###..###..#..#.
@@ -85,12 +86,13 @@ answer2_clean s = splitLine $ drawLine '#' ' ' $ execute initProcess $ convertIn
 #.#..#....#....#....#.#..#..#.#....#..#.
 #..#.#....####.####.#..#.###..#....#..#.
 
-###  #### #### #### #  # ###  ####  ##
-#  # #       # #    # #  #  # #    #  #
-#  # ###    #  ###  ##   ###  ###  #  #
-###  #     #   #    # #  #  # #    ####
-# #  #    #    #    # #  #  # #    #  #
-#  # #    #### #### #  # ###  #    #  #
+███  ████ ████ ████ █  █ ███  ████  ██
+█  █ █       █ █    █ █  █  █ █    █  █
+█  █ ███    █  ███  ██   ███  ███  █  █
+███  █     █   █    █ █  █  █ █    ████
+█ █  █    █    █    █ █  █  █ █    █  █
+█  █ █    ████ ████ █  █ ███  █    █  █
+
 -}
 
 -- show solutions
@@ -101,6 +103,6 @@ compute path = do
     putStrLn $ show $ answer1 input
     putStrLn "Part 2: "
     putStrLn $ answer2 input
-    putStrLn "Part 2 (cleaner colution):"
+    putStrLn "Part 2 (cleaner solution):"
     putStrLn $ answer2_clean input
 
