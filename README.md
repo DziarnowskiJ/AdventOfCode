@@ -38,7 +38,7 @@ The hardest part of this exercise was parsing the input. It was made out of two 
 However, with a couple of functions I have managed to convert it into a Map.  
 The rest of the exercise was quite straightforward as it required only string modifications.
 
-This is visualization of how I have converted first part of the input:
+This shows how I have converted first part of the input:
 ```
 [A]                     Map:
 [B]     [G]     -->     1: "ABCD"
@@ -118,7 +118,8 @@ Thanks to that, I was able to reuse some of my code and the logic that comes wit
 The second part of the problem involved reqursion and made the whole problem more difficult. 
 But to get solution for it, I just needed to extend my code from part 1.
 
-Visualization below shows how the rope would behave:
+Visualization below shows how the rope would behave:  
+*(H signifies the head of the rope, and T its tail)*
 
 ```
 Pull H up:
@@ -128,13 +129,21 @@ Pull H up:
 .T...    .T...    .....
 .....    .....    .....
 
-Pull H to the left:
+Pull H to the right:
 .....    .....    .....
 .....    .....    .....
 ..H.. -> ...H. -> ..TH.
 .T...    .T...    .....
 .....    .....    .....
+
+Pull H down:
+.....    .....    .....
+..T..    ..T..    .....
+..H.. -> ..... -> ..T..
+.....    ..H.. -> ..H..
+.....    .....    .....
 ```
+Second part of the challenge added more ropes connected to each other, such that tail of the rope was fixed to the head of the next one.
 
 ## [Day 10: Cathode-Ray Tube](https://adventofcode.com/2022/day/10)
 
