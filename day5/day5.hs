@@ -4,25 +4,57 @@ import System.IO
 import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Char
+import Data.List
 
 ----------------------------------------------------------------------------------------------
 -- INPUT PROCESSING
 ----------------------------------------------------------------------------------------------
 
-defStr :: Map Int String
-defStr = Map.fromList [
-    (1,"MFCWTDLB"),
-    (2,"LBN"),
-    (3,"VLTHCJ"),
-    (4,"WJPS"),
-    (5,"RLTFCSZ"),
-    (6,"ZNHBGDW"),
-    (7,"NCGVPSMF"),
-    (8,"ZCVFJRQW"),
-    (9,"HLMPR")]
+-- BOXES
 
-convertInput :: String -> [(Int, Int, Int)]
-convertInput s = [(firstNum x, secondNum x, thirdNum x) | x <- lines s]
+-- take lines that represent boxes
+getBoxes :: String -> [String]
+getBoxes s = init $ takeWhile (/= "") $ lines s
+
+-- take only box content
+-- "[A] [B] [C]     [D]" --> "ABC D"
+boxInside :: String -> [Char]
+boxInside "" = []
+boxInside s = [head s] ++ boxInside (drop 4 s)
+
+-- converts string to list of strings 
+-- st. each string in a list has length 1 
+splitString :: String -> [String]
+splitString s = transpose [s]
+
+-- add strings from two lists together
+-- ["ABC",      ["123",     ["ABC123",
+--  "DEF",  ++   "456",  =   "DEF456",
+--  "GHI"]       "789"]      "GHI789"]
+addStrings :: [String] -> [String] -> [String]
+addStrings xs ys = zipWith(\x y -> (x ++ y)) xs ys
+
+-- converts boxes to map
+--                 
+-- [A]            -->   fromList [
+-- [B]     [G]    -->      ("ABCD"),
+-- [C] [E] [H]    -->      ("EF"),
+-- [D] [F] [I]    -->      ("GHI")]
+inputBoxes :: String -> Map Int String
+inputBoxes s = 
+    Map.fromList $
+    zip [1..] $
+    map (dropWhile (==' ')) $
+    foldl1 addStrings $
+    map splitString $
+    map (boxInside . drop 1) $ 
+    getBoxes s
+
+-- INSTRUCTIONS
+
+-- rest of input    
+inputInstructions :: String -> [(Int, Int, Int)]
+inputInstructions s = [(firstNum x, secondNum x, thirdNum x) | x <- tail $ dropWhile (/="") $ lines s]
     where 
         firstNum x = read (takeWhile (isDigit) $ drop 5 x) :: Int
         secondNum x = read (takeWhile (isDigit) $ dropWhile (\x -> isAlpha x || isSpace x) $ dropWhile (/= 'f') x) :: Int
@@ -78,12 +110,12 @@ operation2Total mis xs = foldl (\x y -> operation2 x y) mis xs
 
 -- solution for part 1
 answer1 :: String -> String
-answer1 s = getFirsts $ operationTotal defStr (convertInput s)
+answer1 s = getFirsts $ operationTotal (inputBoxes s) (inputInstructions s)
 -- answer 1 = TGWSMRBPN
 
 -- solution for part 2
 answer2 :: String -> String
-answer2 s = getFirsts $ operation2Total defStr (convertInput s)
+answer2 s = getFirsts $ operation2Total (inputBoxes s) (inputInstructions s)
 -- answer 2 = TZLTLWRNF
 
 -- show solutions

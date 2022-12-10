@@ -1,3 +1,13 @@
+[M]                     [N] [Z]    
+[F]             [R] [Z] [C] [C]    
+[C]     [V]     [L] [N] [G] [V]    
+[W]     [L]     [T] [H] [V] [F] [H]
+[T]     [T] [W] [F] [B] [P] [J] [L]
+[D] [L] [H] [J] [C] [G] [S] [R] [M]
+[L] [B] [C] [P] [S] [D] [M] [Q] [P]
+[B] [N] [J] [S] [Z] [W] [F] [W] [R]
+ 1   2   3   4   5   6   7   8   9 
+
 move 5 from 3 to 6
 move 2 from 2 to 5
 move 1 from 9 to 1
