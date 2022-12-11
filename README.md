@@ -186,7 +186,7 @@ And this is how would the output look like with the use of other characters for 
  With nicely parsed input the soluton for first part was moderatly difficult, however not significantly comparing to previous days.
 
  But this is was not the case with second part!  
- Small modification to the exercise caused some numbers to be so large that integers started to overflow. *(In fact ridiculously large - from what I have found it could be around 10^72 digits long!)*. However, after discovering some correlations in the input *--inspired by some online search--* and the use of modular arithmetics I have managed to get those values to be significantly smaller.
+ Small modification to the exercise caused some numbers to be so large that integers started to overflow. *(In fact ridiculously large - from what I have found it could be around [10^72 digits long](https://www.reddit.com/r/adventofcode/comments/zioepr/2022_day_11_part_2_ridiculous_worry_levels/)!)*. However, after discovering some correlations in the input *--inspired by small online search--* and the use of modular arithmetics I have managed to get those values to be significantly smaller.
 
  It was definitely an intersting challenge! 
 
