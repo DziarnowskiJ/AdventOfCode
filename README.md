@@ -64,20 +64,20 @@ I have managed to solve it with quite messy parsing and the use of reqursion and
 
 This shows how the input should have been interpreted:
 ```
-$ cd /                  /               
-$ ls                    ├─ a            
-dir a                   |  ├─ e         
-14848514 b.txt          |  |  └─ i      (size: 584)   
-8504156 c.dat           |  ├─ f         (size: 29116) 
-dir d                   |  ├─ g         (size: 2557)
-$ cd a                  |  └─ h.lst     (size: 62596)  
-$ ls                    ├─ b.txt        (size: 14848514)
-dir e                   ├─ c.dat        (size: 8504156)
-29116 f                 └─ d            
-2557 g                     ├─ j         (size: 4060174) 
-62596 h.lst                ├─ d.log     (size: 8033020)
-$ cd e                     ├─ d.ext     (size: 5626152)
-$ ls                       └─ k         (size: 7214296)
+$ cd /            /               
+$ ls              ├─ a            
+dir a             |  ├─ e         
+14848514 b.txt    |  |  └─ i      (size: 584)   
+8504156 c.dat     |  ├─ f         (size: 29116) 
+dir d             |  ├─ g         (size: 2557)
+$ cd a            |  └─ h.lst     (size: 62596)  
+$ ls              ├─ b.txt        (size: 14848514)
+dir e             ├─ c.dat        (size: 8504156)
+29116 f           └─ d            
+2557 g               ├─ j         (size: 4060174) 
+62596 h.lst          ├─ d.log     (size: 8033020)
+$ cd e               ├─ d.ext     (size: 5626152)
+$ ls                 └─ k         (size: 7214296)
 584 i                   
 $ cd ..                 
 $ cd ..                 
@@ -169,3 +169,24 @@ And this is how would the output look like with the use of other characters for 
 ███   ██  █    ████ █  █ 
  ```
  I think that this is a really interesting and unique way of getting a solution.
+
+ ## [Day 11: Monkey in the Middle](https://adventofcode.com/2022/day/11)
+ This is the first day where I actually had a problem with getting solutons!  
+ First of all, the input required much more parsing than before:
+ ```
+ Monkey 0:
+  Starting items: 79, 98
+  Operation: new = old * 19
+  Test: divisible by 23
+    If true: throw to monkey 2
+    If false: throw to monkey 3
+ ```
+ Thankfully, a couple of days ago, during my Funcitonal Programming module at university, we covered parser. This was very helpfull today, so the input conversion was not that hard, although it was still gave me some hard times.  
+
+ With nicely parsed input the soluton for first part was moderatly difficult, however not significantly comparing to previous days.
+
+ But this is was not the case with second part!  
+ Small modification to the exercise caused some numbers to be so large that integers started to overflow. *(In fact ridiculously large - from what I have found it could be around 10^72 digits long!)*. However, after discovering some correlations in the input *--inspired by some online search--* and the use of modular arithmetics I have managed to get those values to be significantly smaller.
+
+ It was definitely an intersting challenge! 
+
