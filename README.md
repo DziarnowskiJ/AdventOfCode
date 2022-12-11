@@ -64,20 +64,20 @@ I have managed to solve it with quite messy parsing and the use of reqursion and
 
 This shows how the input should have been interpreted:
 ```
-$ cd /            /               
-$ ls              ├─ a            
-dir a             |  ├─ e         
-14848514 b.txt    |  |  └─ i      (size: 584)   
-8504156 c.dat     |  ├─ f         (size: 29116) 
-dir d             |  ├─ g         (size: 2557)
-$ cd a            |  └─ h.lst     (size: 62596)  
-$ ls              ├─ b.txt        (size: 14848514)
-dir e             ├─ c.dat        (size: 8504156)
-29116 f           └─ d            
-2557 g               ├─ j         (size: 4060174) 
-62596 h.lst          ├─ d.log     (size: 8033020)
-$ cd e               ├─ d.ext     (size: 5626152)
-$ ls                 └─ k         (size: 7214296)
+$ cd /              /               
+$ ls                ├─ a            
+dir a               |  ├─ e         
+14848514 b.txt      |  |  └─ i      (size: 584)   
+8504156 c.dat       |  ├─ f         (size: 29116) 
+dir d               |  ├─ g         (size: 2557)
+$ cd a              |  └─ h.lst     (size: 62596)  
+$ ls                ├─ b.txt        (size: 14848514)
+dir e               ├─ c.dat        (size: 8504156)
+29116 f             └─ d            
+2557 g                 ├─ j         (size: 4060174) 
+62596 h.lst            ├─ d.log     (size: 8033020)
+$ cd e                 ├─ d.ext     (size: 5626152)
+$ ls                   └─ k         (size: 7214296)
 584 i                   
 $ cd ..                 
 $ cd ..                 
