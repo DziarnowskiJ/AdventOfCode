@@ -14,7 +14,7 @@ A bigger challenge than the exercise itself was importing text files to haskell 
 ## [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2)
  
 A very simple exercise that required me to use Map.  
-It was simply implementing the scoring system for the rock-paper-scissors game
+It was just implementation of the scoring system for the rock-paper-scissors game
  
 ## [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3)
  
