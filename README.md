@@ -189,3 +189,20 @@ And this is how would the output look like with the use of other characters for 
  A small modification to the exercise caused some numbers to be so large that integers started to overflow. *(In fact ridiculously large - from what I have found it could be around [10^72 digits long](https://www.reddit.com/r/adventofcode/comments/zioepr/2022_day_11_part_2_ridiculous_worry_levels/)!)*. However, after discovering some correlations in the input *--inspired by small online search--* and the use of modular arithmetics I have managed to get those values to be significantly smaller.
  
  It was an interesting challenge!
+
+ ## [Day 12: Hill Climbing Algorithm](https://adventofcode.com/2022/day/12)
+ I was saved by the lectures again!
+ 
+Today's challenge required me to find the shortest possible path between two points. This would be hard if I were to implement it by myself. However, during one of the lectures, we covered the traversal of mazes in haskell. The solutions were based on a breadth-first search. Thanks to this, I was able to reuse some of the code, although I had to significantly modify it to work with this problem.
+ 
+The challenge's input was a grid of small letters and two capitals *('S' and 'E', signifying start and finish points)*. Each step of the path could be made only on the same letter or one alphabetically after *(so from 'b' we can move to another 'b' or 'c', but not to 'a' nor 'd')*
+The example below shows how the program should compute the path:
+ ```
+Sabqponm           v..v<<<<
+abcryxxl           >v.vv<<^
+accszExk    -->    .>vv>E^^
+acctuvwj           ..v>>>^^
+abdefghi           ..>>>>>^
+ ```
+ 
+Part two of the challenge modified the exercise in such a way that there were multiple possible start points of the path. In the case of my input, it was 2063. As this number was too large to try computing the path for each of those points I decided to analyze the input file. Closer inspection led to the discovery that all 'b's are only in the second column of the grid and the first column is filled with 'a's. That means that a possible path starts with one of those 'a's from the first column. This reduced number of paths to 41. Still many but I have decided to run my program and wait for the results. In the meantime, I looked for some inspiration on how to optimize my solution even more. I found a small suggestion that helped me significantly improve the performance of the code. Funnily, at the moment I have implemented it, my original program returned proper values.
