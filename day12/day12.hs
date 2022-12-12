@@ -79,6 +79,9 @@ customOrd x
 -- PART 2
 --------------------------------------------------------------------------------
 
+-- For this part I managed to find 3 different ways of getting a solution
+-- Each one is more efficient then the previous one!
+
 ------------------------------
 -- LESS EFFICIENT SOLUTION 
 -- (takes ~20 min to compute)
@@ -157,6 +160,45 @@ neighbours2 (p, c) ls
             (Set.fromList [p | (p, c) <- Map.toList ls, (ls Map.! p == 'a' || ls Map.! p == 'S')])
             (neighbours2 (p, 'a') ls)
 
+--------------------------------
+-- EVEN MORE EFFICIENT SOLUTION
+--------------------------------
+
+-- a maze has a set of open locations and a start location
+-- in this case, as we are looking for a closest 
+type DownHill = (MapLocation, Location)
+
+-- interpret a multiline string as a DownHill
+readHill3 :: String -> DownHill
+readHill3 s =
+    (Map.fromList grid,
+    head [(p, c) | (p, c) <- grid, c == 'E'])
+    where grid = readGrid s
+
+-- finds a shortest path between start location and (_, ('a' || 'S')) and returns its length
+-- if the path is not found, returns -1
+pathLength3 :: DownHill -> Int
+pathLength3 (ls, start)  
+    | any (\(p, c) -> (c == 'a' || c == 'S') ) [(p, ls Map.! p) | p <- Set.toList $ neighbours p1] = length ss
+    | otherwise = -1
+    where ss = solve3 (ls, start)
+
+-- points reached in each step from the start to the goal
+solve3 :: DownHill -> [Set Location]
+solve3 (open, start) = 
+    takeWhile (\ s -> 0 == (length $ [(p, c) | (p, c) <- Set.toList s, (c == 'a' || c == 'S')])) $ 
+    bfs (moves3 open) start
+
+-- possible moves in the set from the point
+moves3 :: MapLocation -> Graph Location
+moves3 open (p, c) = 
+    Set.fromList $
+    [ (point, open Map.! point) | 
+        -- reachable points
+        point <- Set.toList $ Set.intersection (Set.fromList $ Map.keys open) (neighbours p),
+        -- check 'hight' accessibility
+        customOrd c - 1 <= customOrd (open Map.! point)]
+
 --------------------------------------------------------------------------------
 -- SHOW ANSWERS
 --------------------------------------------------------------------------------
@@ -172,8 +214,10 @@ answer1 s = pathLength $ readHill s
 -- solution for part 2
 answer2 :: String -> Int
 -- save version of the answer, returns -1 if the path is not found
-answer2 s = (\x -> if x - 1 == answer1 s then x else x - 1) . pathLength2 $ readHill s
+answer2 s = pathLength3 $ readHill3 s
 -- answer 2 = 525
+    -- save version but less optimal
+    -- (\x -> if x == -1 then x else (if x - 1 == answer1 s then x else x - 1)) . pathLength2 $ readHill s
     -- unsave version (returns wrong length is path is not found)
     -- answer2 s = (\x -> if x - 1 == answer1 s then x else x - 1) . length $ solve2 $ readHill s
     -- alternative answer2
