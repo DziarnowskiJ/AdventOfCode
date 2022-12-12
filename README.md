@@ -64,20 +64,20 @@ I have solved it with messy parsing and the use of recursion and trees.
  
 This shows how the input should have been interpreted:
 ```
-$ cd /              /              
-$ ls                ├─ a            
-dir a               |  ├─ e        
-14848514 b.txt      |  |  └─ i      (size: 584)  
-8504156 c.dat       |  ├─ f         (size: 29116)
-dir d               |  ├─ g         (size: 2557)
-$ cd a              |  └─ h.lst     (size: 62596)  
-$ ls                ├─ b.txt        (size: 14848514)
-dir e               ├─ c.dat        (size: 8504156)
-29116 f             └─ d            
-2557 g                 ├─ j         (size: 4060174)
-62596 h.lst            ├─ d.log     (size: 8033020)
-$ cd e                 ├─ d.ext     (size: 5626152)
-$ ls                   └─ k         (size: 7214296)
+$ cd /                    /              
+$ ls                      ├─ a            
+dir a                     |  ├─ e        
+14848514 b.txt            |  |  └─ i      (size: 584)  
+8504156 c.dat             |  ├─ f         (size: 29116)
+dir d                     |  ├─ g         (size: 2557)
+$ cd a                    |  └─ h.lst     (size: 62596)  
+$ ls                      ├─ b.txt        (size: 14848514)
+dir e                     ├─ c.dat        (size: 8504156)
+29116 f                   └─ d            
+2557 g                       ├─ j         (size: 4060174)
+62596 h.lst                  ├─ d.log     (size: 8033020)
+$ cd e                       ├─ d.ext     (size: 5626152)
+$ ls                         └─ k         (size: 7214296)
 584 i                  
 $ cd ..                
 $ cd ..                
@@ -115,35 +115,37 @@ This challenge was quite hard - especially the second part. But it was also very
 I would have had a much bigger problem with this exercise,
 however, thankfully I had covered a quite similar task during lectures on Functional Programming.
 Thanks to that, I was able to reuse some of my code and the logic that comes with it.  
-The second part of the problem involved recursion and made the whole problem more difficult.
-But to get a solution for it, I just needed to extend my code from part 1.
+The second part of the challenge added more ropes connected to each other, such that the tail of the rope was fixed to the head of the next one. Solution for it required recursion which made the whole problem more difficult.
+But to get the answer for it, I just needed to extend my code from part 1.
+
  
 Visualization below shows how the rope would behave:  
-*(H signifies the head of the rope, and T its tail)*
+*(H signifies the head of the rope, T its tail, and numbers intermediate knots)*
  
 ```
-Pull H up:
-.....    .....    .....
-.....    ..H..    ..H..
-..H.. -> ..... -> ..T..
-.T...    .T...    .....
-.....    .....    .....
- 
-Pull H to the right:
-.....    .....    .....
-.....    .....    .....
-..H.. -> ...H. -> ..TH.
-.T...    .T...    .....
-.....    .....    .....
- 
-Pull H down:
-.....    .....    .....
-..T..    ..T..    .....
-..H.. -> ..... -> ..T..
-.....    ..H.. -> ..H..
-.....    .....    .....
+Rope with only head and tail:     |  Rope with intermediate knots:
+                                  |  
+Pull H up:                        |  Pull H up:
+.....    .....    .....           |  ..........    ......H...    ......H...
+.....    ..H..    ..H..           |  ......H...    ..........    ......1...
+..H.. -> ..... -> ..T..           |  .654..1... -> .654..1... -> .654......
+.T...    .T...    .....           |  .T..32....    .T..32....    .T..32....
+.....    .....    .....           |  ..........    ..........    ..........
+                                  |      ┌────────────────────────────┘ 
+Pull H to the right:              |      V
+.....    .....    .....           |  ......H...    ......H...    ......H...
+.....    .....    .....           |  ......1...    ......1...    ......1...
+..H.. -> ...H. -> ..TH.           |  .654..2...    .654.32...    .65.432...
+.T...    .T...    .....           |  .T..3.....    .T........    .T........
+.....    .....    .....           |  ..........    ..........    ..........
+                                  |      ┌────────────────────────────┘ 
+Pull H down:                      |      V
+.....    .....    .....           |  ......H...    ......H...    
+..T..    ..T..    .....           |  ......1...    ......1...    
+..H.. -> ..... -> ..T..           |  .6.5432... -> ..65432...    
+.....    ..H.. -> ..H..           |  .T........    .T........    
+.....    .....    .....           |  ..........    ..........    
 ```
-The second part of the challenge added more ropes connected to each other, such that the tail of the rope was fixed to the head of the next one.
  
 ## [Day 10: Cathode-Ray Tube](https://adventofcode.com/2022/day/10)
  
@@ -198,11 +200,13 @@ Today's challenge required me to find the shortest possible path between two poi
 The challenge's input was a grid of small letters and two capitals *('S' and 'E', signifying start and finish points)*. Each step of the path could be made only on the same letter or one alphabetically after *(so from 'b' we can move to another 'b' or 'c', but not to 'a' nor 'd')*
 The example below shows how the program should compute the path:
  ```
-Sabqponm           v..v<<<<
-abcryxxl           >v.vv<<^
-accszExk    -->    .>vv>E^^
-acctuvwj           ..v>>>^^
-abdefghi           ..>>>>>^
+Input grid:         Shortest possible path:
+
+Sabqponm            v..v<<<<
+abcryxxl     -->    >v.vv<<^
+accszExk            .>vv>E^^
+acctuvwj            ..v>>>^^
+abdefghi            ..>>>>>^
  ```
  
 Part two of the challenge modified the exercise in such a way that there were multiple possible start points of the path. In the case of my input, it was 2063. As this number was too large to try computing the path for each of those points I decided to analyze the input file. Closer inspection led to the discovery that all 'b's are only in the second column of the grid and the first column is filled with 'a's. That means that a possible path starts with one of those 'a's from the first column. This reduced number of paths to 41. Still many but I have decided to run my program and wait for the results. In the meantime, I looked for some inspiration on how to optimize my solution even more. I found a small suggestion that helped me significantly improve the performance of the code. Funnily, at the moment I have implemented it, my original program returned proper values.
