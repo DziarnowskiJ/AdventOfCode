@@ -1,9 +1,8 @@
 module Day where 
--- :set -i../utilities
+
 import System.IO
 import Data.List
 import Parser
-
 
 --------------------------------------------------------------------------------
 -- INPUT PROCESSING
