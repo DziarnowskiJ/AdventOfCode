@@ -14,7 +14,7 @@ A bigger challenge than the exercise itself was importing text files to haskell 
 ## [Day 2: Rock Paper Scissors](https://adventofcode.com/2022/day/2)
  
 A very simple exercise that required me to use Map.  
-It was simply implementing the scoring system for the rock-paper-scissors game
+It was just implementation of the scoring system for the rock-paper-scissors game
  
 ## [Day 3: Rucksack Reorganization](https://adventofcode.com/2022/day/3)
  
@@ -143,7 +143,7 @@ Pull H down:                     |         V
 .....    .....    .....          |     ......H...    ......H...    
 ..T..    ..T..    .....          |     ......1...    ......1...    
 ..H.. -> ..... -> ..T..          |     .6.5432... -> ..65432...    
-.....    ..H.. -> ..H..          |     .T........    .T........    
+.....    ..H..    ..H..          |     .T........    .T........    
 .....    .....    .....          |     ..........    ..........    
 ```
  
@@ -211,11 +211,12 @@ abdefghi            ..>>>>>^
  
 Part two of the challenge modified the exercise in such a way that there were multiple possible start points of the path. In the case of my input, it was 2063. As this number was too large to try computing the path for each of those points I decided to analyze the input file. Closer inspection led to the discovery that all '*b*'s are only in the second column of the grid and the first column is filled with '*a*'s. That means that a possible path starts with one of those '*a*'s from the first column. This reduced number of paths to 41. Still many but I have decided to run my program and wait for the results. In the meantime, I looked for some inspiration on how to optimize my solution even more. I found a small suggestion that helped me significantly improve the performance of the code. Funnily, at the moment I have implemented it, my original program returned proper values.
 
-Later today, I decided to one more time find an even more efficient solution for the second part of the challenge. This time, the algorithm starts the search at the end *('E')* and looks for the closest point where the elevation is denoted as '*a*'. I was thinking about this solution before, however, I have decided not to as I thought implementing it would be too difficult - turns out that it was not!
+Later this day, I decided to one more time find an even more efficient solution for the second part of the challenge. This time, the algorithm starts the search at the end *('E')* and looks for the closest point where the elevation is denoted as '*a*'. I was thinking about using this solution before, however, I have decided not to as I thought implementing it would be too difficult - turns out that it was not!
+
 
  ## [Day 13: Distress Signal](https://adventofcode.com/2022/day/13)
 
-Today's challenge was rather simple. After parsing recursive lists, I needed to implement a comparison function for the elements shown below.
+Today's challenge was rather simple. After parsing recursive lists, I needed to implement a comparison function for the elements shown below.  
 The first part required me to determine whether pairs of signals are in ascending order and if so to keep their index. The second part was based on adding two *signals* that were supposed to be *markers*, and then sorting the whole list.
  
 I have decided to do it through the use of *Eq* and *Ord* instances for my custom datatype representing a *signal*. Although it was not very hard, the fact that I was doing it for the first time made it a bit time-consuming. However, this approach made the solution for the second part very easy, as I could simply use the sort function on a list.
