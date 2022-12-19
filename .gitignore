@@ -1,0 +1,9 @@
+# hide input file
+*/input.txt
+
+# unfinished days
+day14/
+day19/
+
+# supporting files for a day
+day15/test_input_cover_map.txt
