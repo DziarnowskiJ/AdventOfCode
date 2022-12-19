@@ -26,7 +26,6 @@ The first part of the challenge required me to find a character that was common 
                          ^              ^
 ```
  
- 
 ## [Day 4: Camp Cleanup](https://adventofcode.com/2022/day/4)
  
 An interesting problem that required input modification. Strings needed to be split into lists of numbers,
@@ -95,7 +94,7 @@ Another very interesting challenge!
 The exercise required me to treat input as a matrix and implement some operations for it.  
 The first part of the challenge required determining whether a tree would be visible from the outside of the forest. The tree is visible if there are no trees higher than it that would obstruct a view.  
  
-Below is the visualization showing which trees would be visible:
+Below is the visualization showing which trees would be visible *(marked with ' █ ' symbol )*:
  
 ```
 422411333           █████████
@@ -248,3 +247,184 @@ Input:                                   Sorted signals with marked dividers:
 [1,[2,[3,[4,[5,6,7]]]],8,9]        
 [1,[2,[3,[4,[5,6,0]]]],8,9]        
 ```
+## [Day 14: Regolith Reservoir](https://adventofcode.com/2022/day/14)
+It was a hard day!  
+This challenge required me to predict the path of falling sand particles.
+Part 1 was not very hard, and a small tweak made it possible to optimize the solution.
+However, as it turns out, it was not optimal enough to provide the solution for part 2.
+ 
+The graphics below, show the initial cave and the graph on the right signifies the location of all sand particles:
+ 
+```
++ - the point from which the sand is flowing
+. - empty space in the cave
+# - rock formation stopping the sand
+o - sand that came to a full stop (is not moving anymore)
+~ - sand that will be flowing forever (nothing stops it)
+ 
+......+...        .......+...
+..........        .......~...
+..........        ......~o...
+..........        .....~ooo..
+....#...##   ->   ....~#ooo##
+....#...#.        ...~o#ooo#.
+..###...#.        ..~###ooo#.
+........#.        ..~..oooo#.
+........#.        .~o.ooooo#.
+#########.        ~#########.
+..........        ~..........
+```
+ 
+Unfortunately, I have yet to manage to make a coding solution for part 2 yet.
+What I did, was print the resulting cave into a console, and then I manually placed marks for
+empty spaces (those not covered by sand). Later I counted all those occurrences and subtracted them from the
+size of the triangle and all rock foundations. Although it was time-consuming and prone to make mistakes, I managed to complete it. However, I plan to implement this solution in a coding form in the future.
+ 
+## [Day 15: Beacon Exclusion Zone](https://adventofcode.com/2022/day/15)
+ 
+This day was rather unique. The challenge itself was not very hard, but the thing that made the whole exercise difficult was its scale. The question considered finding covered and uncovered areas on the manhattan grid. The input was a set of pairs of points, each describing the size and location of diamond shapes covering the grid. In the first part, I had to determine how many points are covered on a specific line. This was very easy on the test input which was quite small, but the actual input described a square grid with a side of length of approximately 4.000.000 units. For the second part, the solution required finding a single point that is not covered by a shaded region. For the whole grid, it was 16 * 10^13 points to check!
+Fortunately, with some help from the internet, I have managed to create an efficient algorithm for part one which I have also used to solve part 2.
+ 
+Graphical representation of the test input:
+```
+ 
+                         #
+          #             ###
+         ###      #    #####
+        #####    ###  #######
+       #######  ##############
+      #########################
+     ###########################
+    ############################
+   ##############################
+    ##############################
+     ##############################
+      ##############################
+       ##############################
+       #############################
+      #############################
+     ################# ###########
+      ###########################
+       #########################
+        #######################
+       #######################
+      #########################
+     ###########################
+    #############################
+   ###############################
+  #################################
+ ###################################
+###################################
+ ################### # ###########
+  #################     #########
+   ###############       #######
+    #############         #####
+     ###########           ###
+      #########             #
+       #######
+        #####
+         ###
+          #
+```
+ 
+## [Day 16: Proboscidea Volcanium](https://adventofcode.com/2022/day/16)
+Today's challenge can be described as a shortest-path puzzle with an additional parameter that had to be maximized.
+ 
+The input could be read as an unweighted graph, and the goal was to find a way to traverse it to accumulate the highest sum of numbers from the nodes. The second part was somewhat similar, but instead of one agent traversing the graph, there two of them were simultaneously going through this it.
+ 
+My solution first converted the unweighted graph (that contained nodes of value 0) to a fully connected weighted one which had only nodes with values greater than 0. Then it was a simple breadth-first-search for the highest sum of nodes. For the second part, I assumed that each agent would only visit nodes that the other agent did not. This made my solution quite computational-heavy as it had to go through many different permutations of the set of nodes, however eventually *(after a much longer time than I am willing to admit)* it lead to the correct answer.
+ 
+Representation of the input graph and the converted, weighted one:  
+*(node in square brackets was the starting one, and number next to a line determine the cost of traversing the path)*
+```
+ (22)  (2)  ─ (13)                      (21)
+  |     |      |                         |2
+ (0)   (20) ─ [0]          ->   (22)    [0]  ─1─ (13)
+  |     |      |                 |3      |1       |1
+ (0) ─ (3)    (0) ─ (21)        (3) ─1─ (20) ─1─ (2)
+```
+## [Day 17: Pyroclastic Flow](https://adventofcode.com/2022/day/17)
+This was a very interesting challenge as it was based on the Tetris game.  
+The problem was about dropping 5 types of rocks into the tall, narrow chamber. The horizontal movement was described by the input in form of a string of repeating chars '<' and '>'.
+ 
+Possible shapes of rocks:
+```
+     |     |     | $ |
+     |  o  |   X | $ |
+     | ooo |   X | $ | @@
+#### |  o  | XXX | $ | @@
+```
+ 
+The first exercise asked about the height of the pile of rocks after dropping 2022 of them (assuming the rocks fall in cyclical order). This was rather simple and required only proper implementation of described rules of rocks' movement. However, as usual with Advent of Code, the second part took everything to next level of difficulty by increasing the amount of dropped rocks to 1.000.000.000.000! Trying a naive way and brute force was a terrible idea as it would take too much time. After some investigation, both on the internet and in my solutions, I discovered that after some point, there is a repeating pattern of placement of rocks. This allowed me to algebraically determine the height, leading to a much faster solution.
+ 
+Chamber after dropping 5 rocks into it:
+```
+|  @@   |
+|  @@   |
+|  $    |
+|  $    |
+|  $ X  |  
+|  $ X  |  
+|  XXX  |  
+|  o    |
+| ooo   |
+|  o####|
++-------+
+```
+ 
+## [Day 18: Boiling Boulders](https://adventofcode.com/2022/day/18)
+It was a fun challenge, and surprisingly, not that difficult.
+ 
+This exercise is the first one so far that considered 3-dimensional space. It was about finding the surface of a shape created from small cubes. The first part of the question asked for the surface area of all parts that are exposed to air. For the second part, the question was similar, however, 'air pockets' inside the shape had to be discarded.
+ 
+This is a 2-D visualization of the problem
+```
+  Initial shape      Part 1          Part 2
+                                                     
+                      1111            1111
+       ####         12####2         12####2    
+     #### ##       1####4##2       1#### ##2      
+     ##  ####  ->  1##32####1  ->  1##  ####1    
+     ### ####      1###3####1      1### ####1  
+      #####         2#####21        2#####21      
+                     11111           11111
+```
+ 
+The first part of the challenge was rather straightforward. I am quite pleased with my solution for the second part. As shown below, I have found a way to fill the 'air pockets' of the initial shape by getting the inverse of it. From that point, I just had to use the same algorithm that I used for the first part.
+```
+Filled square  -     Initial shape     =  Negative of shape    
+ 
+ ##########                                  ##########
+ ##########              ####                ###    ###
+ ##########            #### ##               #    #  ##
+ ##########    -       ##  ####        =     #  ##    #
+ ##########            ### ####              #   #    #
+ ##########             #####                ##     ###
+ ##########                                  ##########
+                                                 |
+     ┌───────────────────────────────────────────┘
+     V
+ Negative of   -  Reachable points from =   air pockets  
+initial shape      the top-left corner      
+                                                                 
+ ##########           ##########          
+ ###    ###           ###    ###          
+ #    #  ##           #       ##                  #
+ #  ##    #    -      #        #        =       ##
+ #   #    #           #        #                 #
+ ##     ###           ##     ###          
+ ##########           ##########        
+                                                 |
+     ┌───────────────────────────────────────────┘
+     V
+'air pockets'  +      Initial shap      =    Filled shape
+                                                     
+                         ####                   ####  
+      #                #### ##                #######
+    ##         +       ##  ####         =     ########
+     #                 ### ####               ########
+                        #####                  #####                  
+```
+ 
+## [Day 19: Boiling Boulders](https://adventofcode.com/2022/day/19)
+For now, this challenge is too difficult for me. I have managed to write a "solution" for part 1, however, based on my calculations, it would take more than a day to be computed. Obviously, I do not consider this a valid solution and I plan to work on it in the future.
