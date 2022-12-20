@@ -355,7 +355,7 @@ Possible shapes of rocks:
 #### |  o  | XXX | $ | @@
 ```
  
-The first exercise asked about the height of the pile of rocks after dropping 2022 of them (assuming the rocks fall in cyclical order). This was rather simple and required only proper implementation of described rules of rocks' movement. However, as usual with Advent of Code, the second part took everything to next level of difficulty by increasing the amount of dropped rocks to 1.000.000.000.000! Trying a naive way and brute force was a terrible idea as it would take too much time. After some investigation, both on the internet and in my solutions, I discovered that after some point, there is a repeating pattern of placement of rocks. This allowed me to algebraically determine the height, leading to a much faster solution.
+The first exercise asked about the height of the pile of rocks after dropping 2022 of them (assuming the rocks fall in cyclical order). This was rather simple and required only proper implementation of described rules of rocks' movement. However, as usual with Advent of Code, the second part took everything to next level of difficulty by increasing the amount of dropped rocks to 1.000.000.000.000! Trying a naive way and brute force was a terrible idea as it would take too much time. After some investigation, both on the [internet](https://www.reddit.com/r/adventofcode/comments/znykq2/2022_day_17_solutions) and in my solutions, I discovered that after some point, there is a repeating pattern of placement of rocks. This allowed me to algebraically determine the height, leading to a much faster solution.
  
 Chamber after dropping 5 rocks into it:
 ```
@@ -426,5 +426,38 @@ initial shape      the top-left corner
                         #####                  #####                  
 ```
  
-## [Day 19: Boiling Boulders](https://adventofcode.com/2022/day/19)
-For now, this challenge is too difficult for me. I have managed to write a "solution" for part 1, however, based on my calculations, it would take more than a day to be computed. Obviously, I do not consider this a valid solution and I plan to work on it in the future.
+## [Day 19: Not Enough Minerals](https://adventofcode.com/2022/day/19)
+For now, this challenge is too difficult for me. I have managed to write a "solution" for part 1, however, based on my calculations, it would take more than a day for the answer to be computed. Obviously, I do not consider this a valid solution and I plan to work on it in the future.
+
+## [Day 20: Grove Positioning System](https://adventofcode.com/2022/day/20)
+Another not-so-difficult easy challenge.
+ 
+Today's exercise was about modifying the list of numbers. Each number corresponded to the number of spaces it needs to be moved inside the list. My solution was based on splitting this list into 3 parts, such that on the left and right I had parts of the list and in the middle the element that had to be moved. Based on the value of this element, the algorithm was inserting it in the proper sublist and connected them back together. I am quite satisfied with my solution, even though part two takes about 2-3 minutes to complete.  
+This challenge was exceptionally interesting to do in Haskell, as it by default does not support indices in lists, so I had to write some special methods that would work around it.
+
+Consecutive steps during the processing of [1, 2, -3, 3, -2, 0, 4]:
+```
+Initial arrangement:
+1, 2, -3, 3, -2, 0, 4
+
+1 moves between 2 and -3:
+2, 1, -3, 3, -2, 0, 4
+
+2 moves between -3 and 3:
+1, -3, 2, 3, -2, 0, 4
+
+-3 moves between -2 and 0:
+1, 2, 3, -2, -3, 0, 4
+
+3 moves between 0 and 4:
+1, 2, -2, -3, 0, 3, 4
+
+-2 moves between 4 and 1:
+1, 2, -3, 0, 3, 4, -2
+
+0 does not move:
+1, 2, -3, 0, 3, 4, -2
+
+4 moves between -3 and 0:
+1, 2, -3, 4, 0, 3, -2
+```
