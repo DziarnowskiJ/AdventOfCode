@@ -461,3 +461,29 @@ Initial arrangement:
 4 moves between -3 and 0:
 1, 2, -3, 4, 0, 3, -2
 ```
+
+## [Day 21: Monkey Math](https://adventofcode.com/2022/day/21)
+
+Today's challenge was about evaluating expressions. After investigating the input, it was clear that the expression could be presented as a binary tree. This made the first part quite easy as it simply required the in-order traversal of this tree.
+ 
+The second part was a bit harder, as it involved solving the equation with one unknown variable. The goal was to find a new value for node '*humn*', such that subtrees of node '*root*' evaluate to the same number. I think I found an interesting way of solving it by comparing values of both subtrees and recursively propagating this value down the tree that contained the *humn* node by using an opposite expression than in the original tree. So for example starting at *root*, it is visible that *sjmn* does not contain *humn* and it evaluates to *150*. This means that *pppw* must evaluate to the same value. Fact that *pppw = ccch / lfqf*, and *lfqf* does not contain *humn* and evaluates to 4 mean that *ccch* must evaluate to 600 *(150 * 4)*. Recursively following this process eventually leads to the point where *humn* is compared to some other value that can be evaluated. In this case, *ptdq* must evaluate to 298, and knowing that *dvpt* is 3, means that *humn* must be 301. 
+
+
+Binary tree based on the example input:
+```
+root +         
+  ├─ pppw /     
+  |    ├─ ccch +    
+  |    |    ├─ sllz: 4
+  |    |    └─ lgvd * 
+  |    |         ├─ ljgn: 2
+  |    |         └─ ptdq -
+  |    |              ├─ humn: 5
+  |    |              └─ dvpt: 3
+  |    └─ lfqf: 4
+  └─ sjmn *
+       ├─ drzm -
+       |    ├─ hmdt: 32
+       |    └─ zczc: 2
+       └─ dbpl: 5
+```
