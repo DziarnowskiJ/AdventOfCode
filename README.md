@@ -469,21 +469,21 @@ Today's challenge was about evaluating expressions. After investigating the inpu
 The second part was a bit harder, as it involved solving the equation with one unknown variable. The goal was to find a new value for node '*humn*', such that subtrees of node '*root*' evaluate to the same number. I think I found an interesting way of solving it by comparing values of both subtrees and recursively propagating this value down the tree that contained the *humn* node by using an opposite expression than in the original tree. So for example starting at *root*, it is visible that *sjmn* does not contain *humn* and it evaluates to *150*. This means that *pppw* must evaluate to the same value. Fact that *pppw = ccch / lfqf*, and *lfqf* does not contain *humn* and evaluates to 4 mean that *ccch* must evaluate to 600 *(150 * 4)*. Recursively following this process eventually leads to the point where *humn* is compared to some other value that can be evaluated. In this case, *ptdq* must evaluate to 298, and knowing that *dvpt* is 3, means that *humn* must be 301. 
 
 
-Binary tree based on the example input:
+Example input and derived binary tree:
 ```
-root +         
-  ├─ pppw /     
-  |    ├─ ccch +    
-  |    |    ├─ sllz: 4
-  |    |    └─ lgvd * 
-  |    |         ├─ ljgn: 2
-  |    |         └─ ptdq -
-  |    |              ├─ humn: 5
-  |    |              └─ dvpt: 3
-  |    └─ lfqf: 4
-  └─ sjmn *
-       ├─ drzm -
-       |    ├─ hmdt: 32
-       |    └─ zczc: 2
-       └─ dbpl: 5
+root: pppw + sjmn       |   root +         
+dbpl: 5                 |     ├─ pppw /     
+cczh: sllz + lgvd       |     |    ├─ ccch +    
+zczc: 2                 |     |    |    ├─ sllz: 4
+ptdq: humn - dvpt       |     |    |    └─ lgvd * 
+dvpt: 3                 |     |    |         ├─ ljgn: 2
+lfqf: 4                 |     |    |         └─ ptdq -
+humn: 5                 |     |    |              ├─ humn: 5
+ljgn: 2                 |     |    |              └─ dvpt: 3
+sjmn: drzm * dbpl       |     |    └─ lfqf: 4
+sllz: 4                 |     └─ sjmn *
+pppw: cczh / lfqf       |          ├─ drzm -
+lgvd: ljgn * ptdq       |          |    ├─ hmdt: 32
+drzm: hmdt - zczc       |          |    └─ zczc: 2
+hmdt: 32                |          └─ dbpl: 5
 ```
