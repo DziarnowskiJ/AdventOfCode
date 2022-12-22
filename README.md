@@ -430,7 +430,7 @@ initial shape      the top-left corner
 For now, this challenge is too difficult for me. I have managed to write a "solution" for part 1, however, based on my calculations, it would take more than a day for the answer to be computed. Obviously, I do not consider this a valid solution and I plan to work on it in the future.
 
 ## [Day 20: Grove Positioning System](https://adventofcode.com/2022/day/20)
-Another not-so-difficult easy challenge.
+Another not-so-difficult challenge.
  
 Today's exercise was about modifying the list of numbers. Each number corresponded to the number of spaces it needs to be moved inside the list. My solution was based on splitting this list into 3 parts, such that on the left and right I had parts of the list and in the middle the element that had to be moved. Based on the value of this element, the algorithm was inserting it in the proper sublist and connected them back together. I am quite satisfied with my solution, even though part two takes about 2-3 minutes to complete.  
 This challenge was exceptionally interesting to do in Haskell, as it by default does not support indices in lists, so I had to write some special methods that would work around it.
